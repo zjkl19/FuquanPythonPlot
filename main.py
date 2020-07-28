@@ -16,6 +16,7 @@ dataExcel='Data.xlsx';dataSheet='传感器监测数据报表'
 data=xlrd.open_workbook(dataExcel)
 sh=data.sheet_by_name(dataSheet)
 
+defaultFontsize=14    #默认字体大小
 nPoints=15    #15个测点
 
 dataCounts=7*24    #7天数据，7*24=168个，每小时采集一次数据
@@ -37,11 +38,11 @@ yList = np.array(yList)    #列表转换为nparray
 
 xFigsize=10;yFigsize=3
 rotAngle=40    #旋转角度
-base = datetime.datetime(2020, 7, 17)
-
+base = datetime.datetime(2020, 7, 20)
+date1='2020-07-20';date2='2020-07-27 00:00';
 #dates即x轴数据
 dates = [base + datetime.timedelta(hours=(1 * i)) for i in range(dataCounts)]    #1小时1个数据
-date1='2020-07-20';date2='2020-07-27 00:00';
+
 lims = [(np.datetime64(date1), np.datetime64(date2)),
         (np.datetime64(date1), np.datetime64(date2)),
         (np.datetime64(date1), np.datetime64(date2)),
@@ -61,7 +62,7 @@ lims = [(np.datetime64(date1), np.datetime64(date2)),
 
 #F17-D-位移(mm)	G11-D-位移(mm)	F17-L-倾角(°)	G11-L-倾角(°)	D2-2倾角-倾角(°)	ZW24-1倾角-倾角(°)	ZW24-2倾角-倾角(°)	ZE24-1倾角-倾角(°)	ZE24-2倾角-倾角(°)	D2-2-1位移-位移(mm)	D2-2-2位移-位移(mm)	ZW24-1位移-位移(mm)	ZW24-2位移-位移(mm)	ZE24-1位移-位移(mm)	ZE24-2位移-位移(mm)
 
-defaultDispLims=(-0.5,0.5)
+defaultDispLims=(-1.2,1.2)
 defaultLeanLims=(-0.15,0.15)
 defaultLeanAlertSection=(-0.1,0.1)
 
@@ -94,11 +95,18 @@ for i in range(0,nPoints):
     fig, ax = plt.subplots(constrained_layout=True, figsize=(xFigsize, yFigsize))
     
     ax.plot(dates, yList[i])
-    ax.set(xlabel='时间', ylabel=ylabelList[i])
+    #ax.set(xlabel='时间', ylabel=ylabelList[i])
     
     ax.grid()
+
+    
     ax.set_xlim(lims[i])
     ax.set_ylim(ylims[i])
+    
+    plt.xticks(fontsize=defaultFontsize)
+    plt.yticks(fontsize=defaultFontsize)
+    plt.xlabel(xlabel='时间',fontsize=defaultFontsize)
+    plt.ylabel(ylabel=ylabelList[i],fontsize=defaultFontsize)
     
     plt.axhline(y=alertLine[i][0],c="yellow")#添加水平直线
     plt.axhline(y=alertLine[i][1],c="yellow")
