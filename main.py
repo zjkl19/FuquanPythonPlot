@@ -41,39 +41,41 @@ base = datetime.datetime(2020, 7, 17)
 
 #dates即x轴数据
 dates = [base + datetime.timedelta(hours=(1 * i)) for i in range(dataCounts)]    #1小时1个数据
-lims = [(np.datetime64('2020-07-17'), np.datetime64('2020-07-24 00:00')),
-        (np.datetime64('2020-07-17'), np.datetime64('2020-07-24 00:00')),
-        (np.datetime64('2020-07-17'), np.datetime64('2020-07-24 00:00')),
-        (np.datetime64('2020-07-17'), np.datetime64('2020-07-24 00:00')),
-        (np.datetime64('2020-07-17'), np.datetime64('2020-07-24 00:00')),
-        (np.datetime64('2020-07-17'), np.datetime64('2020-07-24 00:00')),
-        (np.datetime64('2020-07-17'), np.datetime64('2020-07-24 00:00')),
-        (np.datetime64('2020-07-17'), np.datetime64('2020-07-24 00:00')),
-        (np.datetime64('2020-07-17'), np.datetime64('2020-07-24 00:00')),
-        (np.datetime64('2020-07-17'), np.datetime64('2020-07-24 00:00')),
-        (np.datetime64('2020-07-17'), np.datetime64('2020-07-24 00:00')),
-        (np.datetime64('2020-07-17'), np.datetime64('2020-07-24 00:00')),
-        (np.datetime64('2020-07-17'), np.datetime64('2020-07-24 00:00')),
-        (np.datetime64('2020-07-17'), np.datetime64('2020-07-24 00:00')),
-        (np.datetime64('2020-07-17'), np.datetime64('2020-07-24 00:00'))]
+date1='2020-07-20';date2='2020-07-27 00:00';
+lims = [(np.datetime64(date1), np.datetime64(date2)),
+        (np.datetime64(date1), np.datetime64(date2)),
+        (np.datetime64(date1), np.datetime64(date2)),
+        (np.datetime64(date1), np.datetime64(date2)),
+        (np.datetime64(date1), np.datetime64(date2)),
+        (np.datetime64(date1), np.datetime64(date2)),
+        (np.datetime64(date1), np.datetime64(date2)),
+        (np.datetime64(date1), np.datetime64(date2)),
+        (np.datetime64(date1), np.datetime64(date2)),
+        (np.datetime64(date1), np.datetime64(date2)),
+        (np.datetime64(date1), np.datetime64(date2)),
+        (np.datetime64(date1), np.datetime64(date2)),
+        (np.datetime64(date1), np.datetime64(date2)),
+        (np.datetime64(date1), np.datetime64(date2)),
+        (np.datetime64(date1), np.datetime64(date2))]
 
 
 #F17-D-位移(mm)	G11-D-位移(mm)	F17-L-倾角(°)	G11-L-倾角(°)	D2-2倾角-倾角(°)	ZW24-1倾角-倾角(°)	ZW24-2倾角-倾角(°)	ZE24-1倾角-倾角(°)	ZE24-2倾角-倾角(°)	D2-2-1位移-位移(mm)	D2-2-2位移-位移(mm)	ZW24-1位移-位移(mm)	ZW24-2位移-位移(mm)	ZE24-1位移-位移(mm)	ZE24-2位移-位移(mm)
 
-
-defaultLeanLims=(-0.1,0.1)
+defaultDispLims=(-0.5,0.5)
+defaultLeanLims=(-0.15,0.15)
+defaultLeanAlertSection=(-0.1,0.1)
 
 ylabelList=['位移(mm)','位移(mm)','倾角(°)','倾角(°)','倾角(°)','倾角(°)','倾角(°)','倾角(°)','倾角(°)','位移(mm)','位移(mm)','位移(mm)','位移(mm)','位移(mm)','位移(mm)']
 
-ylims = [(-1.0, 1.0),(-1.0, 1.0),defaultLeanLims,defaultLeanLims,defaultLeanLims
-        ,defaultLeanLims,defaultLeanLims,defaultLeanLims,defaultLeanLims,(-1.0, 1.0)
-        ,(-1.0, 1.0),(-1.0, 1.0),(-2.0, 2.0),(-1.0, 1.0),(-1.0, 1.0)
-        ,(-1.0, 1.0),(-1.0, 1.0),(-1.0, 1.0),(-1.0, 1.0),(-1.0, 1.0)
-        ,(-1.0, 1.0),(-1.0, 1.0),(-1.0, 1.0),(-1.0, 1.0),(-1.0, 1.0)]
+ylims = [defaultDispLims,defaultDispLims,defaultLeanLims,defaultLeanLims,defaultLeanLims
+        ,defaultLeanLims,defaultLeanLims,defaultLeanLims,defaultLeanLims,defaultDispLims
+        ,defaultDispLims,defaultDispLims,defaultDispLims,defaultDispLims,defaultDispLims
+        ,defaultDispLims,defaultDispLims,defaultDispLims,defaultDispLims,defaultDispLims
+        ,defaultDispLims,defaultDispLims,defaultDispLims,defaultDispLims,defaultDispLims]
 
-alerLine = [(-1.0, 1.0),(-1.0, 1.0),(-1.0, 1.0),(-1.0, 1.0),(-1.0, 1.0)
+alertLine = [(-1.0, 1.0),(-1.0, 1.0),defaultLeanAlertSection,defaultLeanAlertSection,defaultLeanAlertSection
+        ,defaultLeanAlertSection,defaultLeanAlertSection,defaultLeanAlertSection,defaultLeanAlertSection,(-1.0, 1.0)
         ,(-1.0, 1.0),(-1.0, 1.0),(-1.0, 1.0),(-1.0, 1.0),(-1.0, 1.0)
-        ,(-1.0, 1.0),(-1.0, 1.0),(-2.0, 2.0),(-1.0, 1.0),(-1.0, 1.0)
         ,(-1.0, 1.0),(-1.0, 1.0),(-1.0, 1.0),(-1.0, 1.0),(-1.0, 1.0)
         ,(-1.0, 1.0),(-1.0, 1.0),(-1.0, 1.0),(-1.0, 1.0),(-1.0, 1.0)]
 
@@ -98,7 +100,8 @@ for i in range(0,nPoints):
     ax.set_xlim(lims[i])
     ax.set_ylim(ylims[i])
     
-    #plt.axhline(y=0.25,c="yellow")#添加水平直线
+    plt.axhline(y=alertLine[i][0],c="yellow")#添加水平直线
+    plt.axhline(y=alertLine[i][1],c="yellow")
     plt.savefig(measurePointsList[i]+'.jpg')
 #k=0
 #for nn, ax in enumerate(axs):
