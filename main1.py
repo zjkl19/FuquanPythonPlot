@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Jul 24 10:51:33 2020
+月报
 
 @author: 林迪南
 """
@@ -12,13 +12,14 @@ import numpy as np  # 使用import导入模块numpy，并简写成np
 from matplotlib.ticker import FuncFormatter
 
 import datetime
+from matplotlib.dates import DateFormatter
 
 import xlrd
 import xlwt
 
-monitorYear=2020;monitorMonth=9;monitorDay=21;
+monitorYear=2020;monitorMonth=10;monitorDay=1;
 base = datetime.datetime(monitorYear, monitorMonth, monitorDay)
-date1=base.strftime("%Y-%m-%d %H:%M:%S");date2=base +datetime.timedelta(days=1 * 7);
+date1=base.strftime("%Y-%m-%d %H:%M:%S");date2=base +datetime.timedelta(days=1 * 31);
 date2=date2.strftime("%Y-%m-%d %H:%M:%S");
 
 dataExcel='Data.xlsx';dataSheet='传感器监测数据报表'
@@ -37,7 +38,7 @@ if os.path.exists(resultExcel+'x'):
 defaultFontsize=14    #默认字体大小
 nPoints=15    #15个测点
 
-dataCounts=7*24    #7天数据，7*24=168个，每小时采集一次数据
+dataCounts=31*24    #31天数据，31*24=168个，每小时采集一次数据
 scaleFactor=1.0    #控制x轴长度
 
 startRow=2    #从excel表格第3行开始读取
@@ -117,8 +118,12 @@ plt.rcParams['axes.unicode_minus']=False #用来正常显示负号
 
 def formatnum(x, pos):
     return '$%.2f$' % (x)
+
+
+
 formatter = FuncFormatter(formatnum)
 
+xFormatter = DateFormatter('%m-%d')
 
 w=xlwt.Workbook()
 ws=w.add_sheet(resultSheet)
@@ -132,10 +137,12 @@ for i in range(0,nPoints):
     
     ax.grid()
     
+    ax.xaxis.set_major_formatter(xFormatter)
+    
     ax.yaxis.set_major_formatter(formatter)
     ax.set_xlim(lims[i])
     
-    ax.set_ylim(ylims[i])
+    #ax.set_ylim(ylims[i])
     vals = ax.get_yticks()
     ax.set_yticklabels(['{:1.4f}'.format(x) for x in vals])
     
