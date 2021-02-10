@@ -17,10 +17,10 @@ from matplotlib.dates import DateFormatter
 import xlrd
 import xlwt
 
-monitorYear=2020;monitorMonth=11;monitorDay=30;
+monitorYear=2021;monitorMonth=1;monitorDay=1;
 totalHours=744
 
-base = datetime.datetime(monitorYear, monitorMonth, monitorDay,19)
+base = datetime.datetime(monitorYear, monitorMonth, monitorDay)
 date1=base.strftime("%Y-%m-%d %H:%M:%S");date2=base +datetime.timedelta(hours=totalHours);
 date2=date2.strftime("%Y-%m-%d %H:%M:%S");
 
@@ -85,8 +85,16 @@ lims = [(np.datetime64(date1), np.datetime64(date2)),
         (np.datetime64(date1), np.datetime64(date2)),
         (np.datetime64(date1), np.datetime64(date2))]
 
-
+#      1            2                3              4                 5               6                  7                   8                     9                       10             11                12
 #F17-D-位移(mm)	G11-D-位移(mm)	F17-L-倾角(°)	G11-L-倾角(°)	D2-2倾角-倾角(°)	ZW24-1倾角-倾角(°)	ZW24-2倾角-倾角(°)	ZE24-1倾角-倾角(°)	ZE24-2倾角-倾角(°)	D2-2-1位移-位移(mm)	D2-2-2位移-位移(mm)	ZW24-1位移-位移(mm)	ZW24-2位移-位移(mm)	ZE24-1位移-位移(mm)	ZE24-2位移-位移(mm)
+
+#      1            2                3              4                 5               
+#6                  7                   8                     9                       10
+#             11                12
+#F17-D-位移(mm)	G11-D-位移(mm)	F17-L-倾角(°)	G11-L-倾角(°)	D2-2倾角-倾角(°)	
+#ZW24-1倾角-倾角(°)	ZW24-2倾角-倾角(°)	ZE24-1倾角-倾角(°)	ZE24-2倾角-倾角(°)	D2-2-1位移-位移(mm)	
+#D2-2-2位移-位移(mm)	ZW24-1位移-位移(mm)	ZW24-2位移-位移(mm)	ZE24-1位移-位移(mm)	ZE24-2位移-位移(mm)
+
 
 defaultDispLims=(-1.5,1.5)
 defaultLeanLims=(-0.001,0.002)
@@ -94,11 +102,13 @@ defaultLeanAlertSection=(-0.1,0.1)
 
 ylabelList=['位移(mm)','位移(mm)','倾角(°)','倾角(°)','倾角(°)','倾角(°)','倾角(°)','倾角(°)','倾角(°)','位移(mm)','位移(mm)','位移(mm)','位移(mm)','位移(mm)','位移(mm)']
 
-ylims = [defaultDispLims,defaultDispLims,defaultLeanLims,defaultLeanLims,defaultLeanLims
-        ,defaultLeanLims,defaultLeanLims,defaultLeanLims,defaultLeanLims,defaultDispLims
-        ,defaultDispLims,defaultDispLims,defaultDispLims,defaultDispLims,defaultDispLims
-        ,defaultDispLims,defaultDispLims,defaultDispLims,defaultDispLims,defaultDispLims
-        ,defaultDispLims,defaultDispLims,defaultDispLims,defaultDispLims,defaultDispLims]
+ylims = [defaultDispLims,defaultDispLims,defaultLeanLims,defaultLeanLims,(0.00-0.005,0.02+0.005)
+        ,(-0.015,0.01),(-0.025,0.005),(-0.01,0.01),(-0.015,0.015),(149.6,150.3)
+        ,(169.5,170.1),(250.4,251.4),(222.0,222.6),(148.4,148.8),(129.8,130.4)]
+
+yticklabelFormat=['{:1.2f}','{:1.2f}','{:1.4f}','{:1.4f}','{:1.4f}'
+                  ,'{:1.4f}','{:1.4f}','{:1.4f}','{:1.4f}','{:1.2f}'
+                  ,'{:1.2f}','{:1.2f}','{:1.2f}','{:1.2f}','{:1.2f}']
 
 alertLine = [(-1.0, 1.0),(-1.0, 1.0),defaultLeanAlertSection,defaultLeanAlertSection,defaultLeanAlertSection
         ,defaultLeanAlertSection,defaultLeanAlertSection,defaultLeanAlertSection,defaultLeanAlertSection,(-1.0, 1.0)
@@ -155,9 +165,10 @@ for i in range(0,nPoints):
     ax.yaxis.set_major_formatter(formatter)
     ax.set_xlim(lims[i])
     
-    #ax.set_ylim(ylims[i])
+    ax.set_ylim(ylims[i])
+    
     vals = ax.get_yticks()
-    ax.set_yticklabels(['{:1.4f}'.format(x) for x in vals])
+    ax.set_yticklabels([yticklabelFormat[i].format(x) for x in vals])
     
     
     #作双轴曲线
