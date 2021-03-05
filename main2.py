@@ -17,8 +17,8 @@ from matplotlib.dates import DateFormatter
 import xlrd
 import xlwt
 
-monitorYear=2021;monitorMonth=1;monitorDay=1;
-totalHours=744
+monitorYear=2021;monitorMonth=2;monitorDay=1;
+totalHours=672
 
 base = datetime.datetime(monitorYear, monitorMonth, monitorDay)
 date1=base.strftime("%Y-%m-%d %H:%M:%S");date2=base +datetime.timedelta(hours=totalHours);
@@ -102,9 +102,9 @@ defaultLeanAlertSection=(-0.1,0.1)
 
 ylabelList=['位移(mm)','位移(mm)','倾角(°)','倾角(°)','倾角(°)','倾角(°)','倾角(°)','倾角(°)','倾角(°)','位移(mm)','位移(mm)','位移(mm)','位移(mm)','位移(mm)','位移(mm)']
 
-ylims = [defaultDispLims,defaultDispLims,defaultLeanLims,defaultLeanLims,(0.00-0.005,0.02+0.005)
-        ,(-0.015,0.01),(-0.025,0.005),(-0.01,0.01),(-0.015,0.015),(149.6,150.3)
-        ,(169.5,170.1),(250.4,251.4),(222.0,222.6),(148.4,148.8),(129.8,130.4)]
+ylims = [(-0.08,0.10),(-0.02,0.4),(-0.014,0.006),(-0.005,0.025),(0.00-0.005,0.02+0.005)
+        ,(-0.020,0.005),(-0.025,0.000),(-0.01,0.01),(-0.015,0.015),(149.6,150.2)
+        ,(169.4,170.4),(249.6,251.4),(222.0,222.6),(148.4,148.8),(129.7,130.3)]
 
 yticklabelFormat=['{:1.2f}','{:1.2f}','{:1.4f}','{:1.4f}','{:1.4f}'
                   ,'{:1.4f}','{:1.4f}','{:1.4f}','{:1.4f}','{:1.2f}'
@@ -125,7 +125,7 @@ alertLine = [(-1.0, 1.0),(-1.0, 1.0),defaultLeanAlertSection,defaultLeanAlertSec
 #"ZW24-1位移-位移(mm)", "ZW24-2位移-位移(mm)", "ZE24-1位移-位移(mm)", "ZE24-2位移-位移(mm)", "F17-D-位移(mm)"
 #, "G11-D-位移(mm)" };
 #decimal[] benchmarkData = new decimal[dataColumns] { 170m, 150m, 240m, 210m, 145m, 130m, 338.00m, 250.00m };
-baseData      = [338.00,  250.00,0.0,0.0,0.0,0.0,0.0,0.0,0.0,150.0, 170.0, 240.0, 210.0, 145.0, 130.0]
+baseData      = [0.00,  0.00,0.0,0.0,0.0,0.0,0.0,0.0,0.0,150.0, 170.0, 240.0, 210.0, 145.0, 130.0]
 directionCoff = [ -1.00, -1.0   ,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0  ,   1.0,   1.0,   1.0,   1.0,   1.0 ];
  
 yList = [[] for i in range(nPoints)]  # 创建的是多行n列的二维列表
